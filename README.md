@@ -20,4 +20,4 @@ Canlı adres: (eklenecek)
 
 ## Geliştirici
 
-Raimberdi Aitmamatov — Öğrenci No: 2616501812
+Raimberdi Aitmamatov — 2616501812
