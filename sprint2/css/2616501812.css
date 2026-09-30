@@ -70,3 +70,62 @@ footer {
 a {
   color: var(--renk-ana);
 }
+
+/* Kartlar */
+.kartlar {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--bosluk-m);
+}
+
+.kart {
+  background: var(--renk-kart);
+  border: 1px solid var(--renk-cizgi);
+  border-radius: var(--kose);
+  padding: var(--bosluk-m);
+}
+
+.kart h3 {
+  margin: 0 0 0.5rem;
+}
+
+.kart p {
+  margin: 0 0 0.5rem;
+}
+
+.kart a {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Geniş ekran: birden fazla sütun */
+@media (min-width: 600px) {
+  .kartlar {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+/* Ayın Programı tablosu */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--renk-kart);
+}
+
+caption {
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+th,
+td {
+  border: 1px solid var(--renk-cizgi);
+  padding: 0.5rem;
+  text-align: left;
+}
+
+th {
+  background: var(--renk-ana);
+  color: var(--renk-acik);
+}
