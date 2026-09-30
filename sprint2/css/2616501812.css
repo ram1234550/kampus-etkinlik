@@ -129,3 +129,70 @@ th {
   background: var(--renk-ana);
   color: var(--renk-acik);
 }
+
+
+/* Detay sayfası */
+.detay {
+  display: grid;
+  gap: var(--bosluk-m);
+}
+
+figure {
+  margin: 0;
+}
+
+figure img {
+  display: block;
+  width: 100%;
+  border-radius: var(--kose);
+}
+
+figcaption {
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.kunye {
+  background: var(--renk-kart);
+  border: 1px solid var(--renk-cizgi);
+  border-radius: var(--kose);
+  padding: var(--bosluk-m);
+  margin: 0 0 var(--bosluk-m);
+}
+
+.kunye dt {
+  font-weight: bold;
+}
+
+.kunye dd {
+  margin: 0 0 0.5rem;
+}
+
+.detay h2 {
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem;
+}
+
+.detay a {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Geniş ekran: afiş solda, künye sağda */
+@media (min-width: 700px) {
+  .detay {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .kunye {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 1rem;
+  }
+
+  .kunye dd {
+    margin: 0;
+  }
+}
