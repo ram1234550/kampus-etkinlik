@@ -16,7 +16,7 @@ Bu sprintte yalnızca HTML kullanılmıştır (CSS ve JavaScript yok).
 
 ## Canlı adres
 
-Canlı adres: (eklenecek)
+Canlı adres: https://kampus-etkinlik-sprint1-plum.vercel.app
 
 ## Geliştirici
 
