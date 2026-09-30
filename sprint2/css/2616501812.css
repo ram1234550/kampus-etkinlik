@@ -12,6 +12,7 @@
   --renk-cizgi: hsl(var(--ton) 20% 85%);
   --renk-hata: hsl(0 70% 45%);
   --renk-acik: #fff;
+  --renk-hata-zemin: hsl(0 80% 96%);
 }
 
 * {
@@ -194,5 +195,80 @@ figcaption {
 
   .kunye dd {
     margin: 0;
+  }
+}
+
+
+/* Formlar */
+form {
+  max-width: 600px;
+  background: var(--renk-kart);
+  border: 1px solid var(--renk-cizgi);
+  border-radius: var(--kose);
+  padding: var(--bosluk-m);
+}
+
+form p {
+  margin: 0 0 var(--bosluk-m);
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.6rem;
+  font: inherit;
+  color: inherit;
+  background: var(--renk-kart);
+  border: 1px solid var(--renk-cizgi);
+  border-radius: var(--kose);
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--renk-ana);
+  border-color: var(--renk-ana);
+}
+
+/* Boş bırakılan zorunlu alan kırmızı */
+input:user-invalid,
+select:user-invalid,
+textarea:user-invalid {
+  border-color: var(--renk-hata);
+  background: var(--renk-hata-zemin);
+}
+
+button {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.75rem 1.5rem;
+  font: inherit;
+  font-weight: bold;
+  color: var(--renk-acik);
+  background: var(--renk-ana);
+  border: none;
+  border-radius: var(--kose);
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.15);
+}
+
+@media (min-width: 600px) {
+  button {
+    width: auto;
   }
 }
