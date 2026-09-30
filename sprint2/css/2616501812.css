@@ -1,0 +1,72 @@
+/* Raimberdi Aitmamatov — 2616501812 */
+:root {
+  --no: 2616501812;
+  --ton: mod(var(--no), 360);
+  --renk-ana: hsl(var(--ton) 65% 38%);
+  --renk-zemin: hsl(var(--ton) 30% 97%);
+  --font: Tahoma, sans-serif;
+  --bosluk-m: 1rem;  --kose: 8px;
+
+  --renk-yazi: hsl(var(--ton) 30% 15%);
+  --renk-kart: #fff;
+  --renk-cizgi: hsl(var(--ton) 20% 85%);
+  --renk-hata: hsl(0 70% 45%);
+  --renk-acik: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--renk-zemin);
+  color: var(--renk-yazi);
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Başlık ve menü */
+header {
+  background: var(--renk-ana);
+  color: var(--renk-acik);
+  padding: var(--bosluk-m);
+}
+
+header h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+nav a {
+  color: var(--renk-acik);
+  text-decoration: none;
+  padding: 0.25rem 0;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* İçerik alanı */
+main,
+footer {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--bosluk-m);
+}
+
+a {
+  color: var(--renk-ana);
+}
