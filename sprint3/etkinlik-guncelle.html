@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etkinlik Güncelle - Kampüs Etkinlikleri</title>
+    <link rel="stylesheet" href="css/2616501812.css">
+    <script type="module" src="js/event-form.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Etkinlik Güncelle</h1>
+        <nav>
+            <a href="index.html">Ana Sayfa</a>
+            <a href="etkinlikler.html">Etkinlikler</a>
+            <a href="etkinlik-ekle.html">Ekle</a>
+        </nav>
+    </header>
+
+    <main>
+        <p id="form-bilgi" class="form-bilgi">Alanlar mevcut etkinliğin bilgileriyle dolu gelir. Bu sprintte form veri güncellemez.</p>
+
+        <form id="etkinlik-formu" novalidate data-mode="guncelle">
+            <p>
+                <label for="ad">Etkinlik Adı *</label>
+                <input type="text" id="ad" name="ad" required>
+                <span class="hata" id="ad-hata"></span>
+            </p>
+
+            <p>
+                <label for="kategori">Kategori *</label>
+                <select id="kategori" name="kategori" required>
+                    <option value="">Seçiniz</option>
+                    <option value="Seminer">Seminer</option>
+                    <option value="Atölye">Atölye</option>
+                    <option value="Söyleşi">Söyleşi</option>
+                </select>
+                <span class="hata" id="kategori-hata"></span>
+            </p>
+
+            <p>
+                <label for="tarih">Tarih *</label>
+                <input type="date" id="tarih" name="tarih" required>
+                <span class="hata" id="tarih-hata"></span>
+            </p>
+
+            <p>
+                <label for="saat">Saat *</label>
+                <input type="time" id="saat" name="saat" required>
+                <span class="hata" id="saat-hata"></span>
+            </p>
+
+            <p>
+                <label for="yer">Yer *</label>
+                <input type="text" id="yer" name="yer" placeholder="Örn. A Blok Konferans Salonu" required>
+                <span class="hata" id="yer-hata"></span>
+            </p>
+
+            <p>
+                <label for="kontenjan">Kontenjan</label>
+                <input type="number" id="kontenjan" name="kontenjan" min="1" max="1000">
+                <span class="hata" id="kontenjan-hata"></span>
+            </p>
+
+            <p>
+                <label for="aciklama">Açıklama</label>
+                <textarea id="aciklama" name="aciklama" rows="5"></textarea>
+            </p>
+
+            <button type="submit">Güncelle</button>
+        </form>
+
+        <div id="form-mesaj" aria-live="polite"></div>
+    </main>
+
+    <footer>
+        <p>Raimberdi Aitmamatov · 2616501812 · 2026</p>
+    </footer>
+</body>
+</html>
