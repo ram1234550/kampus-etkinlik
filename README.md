@@ -2,21 +2,24 @@ https://kampus-etkinlik-sprint1-plum.vercel.app
 
 # Kampüs Etkinlikleri
 
-Süleyman Demirel Üniversitesi kampüsündeki seminer, atölye ve söyleşi etkinliklerini listeleyen, arama ve kategori filtresi sunan, detaylarını gösteren ve etkinlik ekleme/güncelleme formları içeren bir web uygulaması. Web Teknolojileri dersi kapsamında geliştirilmektedir.
+Sprint 4: Vite + React + TypeScript (`frontend/` klasörü).
 
-## Sprintler
+## Dosyalar
 
-- `sprint1/` — Yalnızca HTML: beş sayfa, semantic yapı, formlar
-- `sprint2/` — CSS ve responsive tasarım: numaradan renk ve font, kart görünümü
-- `sprint3/` — JavaScript ve DOM: etkinlikler `data.js`'ten üretilir, arama + kategori filtresi, `?id=` ile detay, form doğrulama
-
-## Sayfalar
-
-- `index.html` — Ana sayfa: tarihi en yakın 2 etkinlik
-- `etkinlikler.html` — Tüm etkinlikler, arama ve kategori filtresi
-- `etkinlik-detay.html?id=event-1` — Seçilen etkinliğin afişi, künyesi ve açıklaması
-- `etkinlik-ekle.html` — Yeni etkinlik formu (doğrulama ile)
-- `etkinlik-guncelle.html?id=event-1` — Seçilen etkinliği güncelleme formu
+- `package.json` — Proje adı, komutlar (dev, build) ve paket listesi
+- `package-lock.json` — Yüklenen paketlerin tam sürümleri
+- `node_modules/` — İndirilen paketler; GitHub'a gönderilmez
+- `tsconfig*.json` — TypeScript ayarları
+- `vite.config.ts` — Vite ayarları ve React eklentisi
+- `index.html` — Tek HTML dosyası; içinde boş `div#root`
+- `src/main.tsx` — React'i başlatır, App'i root'a çizer
+- `src/App.tsx` — Beş sayfanın hepsi; sayfa geçişi ve arama state ile
+- `src/App.css` — Sprint 3'ten taşınan stiller
+- `src/index.css` — Genel stil dosyası; bu sprintte boş
+- `src/types/campus-event.ts` — Etkinlik tipi ve kategori tipi
+- `src/data/events.ts` — 6 etkinlik verisi
+- `src/utils/filter-events.ts` — Arama, kategori filtresi ve id ile bulma fonksiyonları
+- `public/` — Olduğu gibi kopyalanan dosyalar (afis.svg)
 
 ## Geliştirici
 
