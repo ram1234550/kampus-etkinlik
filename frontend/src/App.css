@@ -160,7 +160,7 @@ a {
   margin-bottom: var(--bosluk-m);
 }
 
-#sonuc {
+.sonuc {
   font-weight: bold;
   color: var(--renk-ana);
 }
