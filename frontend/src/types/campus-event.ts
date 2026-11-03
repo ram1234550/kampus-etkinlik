@@ -12,3 +12,17 @@ export interface CampusEvent {
   description: string;
   image?: string; // afiş isteğe bağlı
 }
+
+// Formdaki veri: id yok, input'lar hep metin verir
+export interface EventFormData {
+  title: string;
+  category: Category | "";
+  date: string;
+  time: string;
+  location: string;
+  capacity: string;
+  description: string;
+}
+
+// Her alana en fazla bir hata mesajı
+export type EventFormErrors = Partial<Record<keyof EventFormData, string>>;

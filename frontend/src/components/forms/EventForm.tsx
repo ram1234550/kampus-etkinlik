@@ -1,135 +1,85 @@
 import { useState } from "react";
-import type { CampusEvent, Category } from "../../types/campus-event";
-import { validateEvent } from "../../utils/validation";
-import type { Errors } from "../../utils/validation";
+import type { ChangeEvent, FormEvent } from "react";
+import type { Category, EventFormData, EventFormErrors } from "../../types/campus-event";
+import { validateEvent } from "../../utils/validate-event";
 
-type EventData = Omit<CampusEvent, "id">;
+const categories: Category[] = ["Seminer", "Atölye", "Söyleşi", "Yarışma"];
 
 interface EventFormProps {
-  initial?: CampusEvent;
+  initialData: EventFormData;
   submitText: string;
-  onSubmit: (data: EventData) => void;
+  onSubmit: (data: EventFormData) => void;
 }
 
-function EventForm({ initial, submitText, onSubmit }: EventFormProps) {
-  // Güncellemede alanlar dolu gelir
-  const [title, setTitle] = useState(initial?.title ?? "");
-  const [category, setCategory] = useState<Category | "">(initial?.category ?? "");
-  const [date, setDate] = useState(initial?.date ?? "");
-  const [time, setTime] = useState(initial?.time ?? "");
-  const [location, setLocation] = useState(initial?.location ?? "");
-  const [capacity, setCapacity] = useState(initial ? String(initial.capacity) : "");
-  const [description, setDescription] = useState(initial?.description ?? "");
-  const [errors, setErrors] = useState<Errors>({});
+// Form kaydetmeyi bilmez; veriyi sayfaya verir
+function EventForm({ initialData, submitText, onSubmit }: EventFormProps) {
+  const [data, setData] = useState<EventFormData>(initialData);
+  const [errors, setErrors] = useState<EventFormErrors>({});
 
-  function handleSubmit(e: React.FormEvent) {
+  // Tek handleChange bütün alanlara yeter: name'e bakar
+  function handleChange(
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) {
+    setData({ ...data, [e.target.name]: e.target.value });
+  }
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const data: EventData = {
-      title: title.trim(),
-      category: category as Category,
-      date,
-      time,
-      location: location.trim(),
-      capacity: Number(capacity),
-      description: description.trim(),
-      image: initial?.image,
-    };
     const found = validateEvent(data);
     setErrors(found);
     if (Object.keys(found).length === 0) onSubmit(data);
   }
 
-  const hasErrors = Object.keys(errors).length > 0;
-
   return (
     <form className="form" noValidate onSubmit={handleSubmit}>
-      {hasErrors && (
-        <p className="mesaj mesaj-hata">Formda hatalı alanlar var. Kırmızı alanları düzeltin.</p>
-      )}
       <p>
-        <label htmlFor="title">Etkinlik Adı *</label>
-        <input
-          id="title"
-          value={title}
-          maxLength={80}
+        <label htmlFor="title">Etkinlik Adı</label>
+        <input id="title" name="title" value={data.title} onChange={handleChange}
           placeholder="Örn. Kariyer Günleri 2026"
-          aria-invalid={errors.title ? true : undefined}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        {errors.title && <span className="hata">{errors.title}</span>}
+          aria-invalid={errors.title ? true : undefined} />
+        <span className="hata-metni">{errors.title}</span>
       </p>
       <p>
-        <label htmlFor="category">Kategori *</label>
-        <select
-          id="category"
-          value={category}
-          aria-invalid={errors.category ? true : undefined}
-          onChange={(e) => setCategory(e.target.value as Category | "")}
-        >
+        <label htmlFor="category">Kategori</label>
+        <select id="category" name="category" value={data.category} onChange={handleChange}
+          aria-invalid={errors.category ? true : undefined}>
           <option value="">Seçiniz</option>
-          <option value="Seminer">Seminer</option>
-          <option value="Atölye">Atölye</option>
-          <option value="Söyleşi">Söyleşi</option>
-          <option value="Yarışma">Yarışma</option>
+          {categories.map((c) => (
+            <option key={c} value={c}>{c}</option>
+          ))}
         </select>
-        {errors.category && <span className="hata">{errors.category}</span>}
+        <span className="hata-metni">{errors.category}</span>
       </p>
       <p>
-        <label htmlFor="date">Tarih *</label>
-        <input
-          type="date"
-          id="date"
-          value={date}
-          aria-invalid={errors.date ? true : undefined}
-          onChange={(e) => setDate(e.target.value)}
-        />
-        {errors.date && <span className="hata">{errors.date}</span>}
+        <label htmlFor="date">Tarih</label>
+        <input type="date" id="date" name="date" value={data.date} onChange={handleChange}
+          aria-invalid={errors.date ? true : undefined} />
+        <span className="hata-metni">{errors.date}</span>
       </p>
       <p>
-        <label htmlFor="time">Saat *</label>
-        <input
-          type="time"
-          id="time"
-          value={time}
-          aria-invalid={errors.time ? true : undefined}
-          onChange={(e) => setTime(e.target.value)}
-        />
-        {errors.time && <span className="hata">{errors.time}</span>}
+        <label htmlFor="time">Saat</label>
+        <input type="time" id="time" name="time" value={data.time} onChange={handleChange}
+          aria-invalid={errors.time ? true : undefined} />
+        <span className="hata-metni">{errors.time}</span>
       </p>
       <p>
-        <label htmlFor="location">Yer *</label>
-        <input
-          id="location"
-          value={location}
+        <label htmlFor="location">Yer</label>
+        <input id="location" name="location" value={data.location} onChange={handleChange}
           placeholder="Örn. A Blok Konferans Salonu"
-          aria-invalid={errors.location ? true : undefined}
-          onChange={(e) => setLocation(e.target.value)}
-        />
-        {errors.location && <span className="hata">{errors.location}</span>}
+          aria-invalid={errors.location ? true : undefined} />
+        <span className="hata-metni">{errors.location}</span>
       </p>
       <p>
-        <label htmlFor="capacity">Kontenjan *</label>
-        <input
-          type="number"
-          id="capacity"
-          min={1}
-          max={1000}
-          value={capacity}
-          aria-invalid={errors.capacity ? true : undefined}
-          onChange={(e) => setCapacity(e.target.value)}
-        />
-        {errors.capacity && <span className="hata">{errors.capacity}</span>}
+        <label htmlFor="capacity">Kontenjan</label>
+        <input type="number" id="capacity" name="capacity" value={data.capacity}
+          onChange={handleChange} aria-invalid={errors.capacity ? true : undefined} />
+        <span className="hata-metni">{errors.capacity}</span>
       </p>
       <p>
-        <label htmlFor="description">Açıklama *</label>
-        <textarea
-          id="description"
-          rows={5}
-          value={description}
-          aria-invalid={errors.description ? true : undefined}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        {errors.description && <span className="hata">{errors.description}</span>}
+        <label htmlFor="description">Açıklama</label>
+        <textarea id="description" name="description" rows={5} value={data.description}
+          onChange={handleChange} aria-invalid={errors.description ? true : undefined} />
+        <span className="hata-metni">{errors.description}</span>
       </p>
       <button type="submit">{submitText}</button>
     </form>

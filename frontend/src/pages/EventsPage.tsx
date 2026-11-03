@@ -1,14 +1,13 @@
 import { useState } from "react";
-import Header from "../components/layout/Header";
 import EventFilter from "../components/events/EventFilter";
 import EventList from "../components/events/EventList";
-import FlashMessage from "../components/ui/FlashMessage";
-import { useEvents } from "../context/EventContext";
+import { useEvents } from "../context/EventsContext";
 import type { Category } from "../types/campus-event";
 import { filterByCategory, searchEvents } from "../utils/filter-events";
 
 function EventsPage() {
   const { events } = useEvents();
+  // Filtre state'i sadece bu sayfanın işi
   const [searchText, setSearchText] = useState("");
   const [category, setCategory] = useState<Category | "">("");
 
@@ -17,23 +16,16 @@ function EventsPage() {
 
   return (
     <>
-      <Header title="Tüm Etkinlikler" text="Kampüste düzenlenen tüm etkinlikler." />
-      <main>
-        <FlashMessage />
-        <section>
-          <EventFilter
-            searchText={searchText}
-            category={category}
-            categories={categories}
-            onSearchChange={setSearchText}
-            onCategoryChange={setCategory}
-          />
-          {filtered.length > 0 && (
-            <p className="sonuc">{filtered.length} etkinlik listeleniyor.</p>
-          )}
-          <EventList events={filtered} emptyText="Aramanıza uygun etkinlik bulunamadı." />
-        </section>
-      </main>
+      <h2 className="bolum-baslik">Tüm Etkinlikler</h2>
+      <EventFilter
+        searchText={searchText}
+        category={category}
+        categories={categories}
+        onSearchChange={setSearchText}
+        onCategoryChange={setCategory}
+      />
+      {filtered.length > 0 && <p className="sonuc">{filtered.length} etkinlik listeleniyor.</p>}
+      <EventList events={filtered} emptyText="Aramanıza uygun etkinlik bulunamadı." />
     </>
   );
 }

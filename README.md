@@ -2,36 +2,34 @@ https://raimberdiaitmamatov-frontend.vercel.app
 
 # Kampüs Etkinlikleri
 
-Vize projesi: Vite + React + TypeScript + React Router (`frontend/` klasörü).
+Vize projesi (Sprint 6): Vite + React + TypeScript + React Router + Context (`frontend/` klasörü).
 
-## Özellikler
+## Route'lar (10 adres, 10 sayfa)
 
-- 10 route (React Router)
-- Context: `EventContext` (etkinlik ekle / güncelle / sil) ve `AuthContext` (giriş, kayıt, çıkış)
-- Silmeden önce onay penceresi; değişiklikler tüm sayfalarda görünür
-- Arama ve kategori filtresi
-- Form doğrulama: etkinlik formu, giriş, kayıt, şifremi unuttum
-- Mobil uyumlu tasarım
+| Adres | Sayfa |
+|---|---|
+| `/` | HomePage — yaklaşan 2 etkinlik |
+| `/events` | EventsPage — arama ve kategori filtresi |
+| `/events/:id` | EventDetailPage — etkinlik detayı |
+| `/login` | LoginPage — giriş formu (doğrulama) |
+| `/register` | RegisterPage — kayıt formu (doğrulama) |
+| `/forgot-password` | ForgotPasswordPage — şifremi unuttum |
+| `/admin` | AdminPage — yönetim tablosu, Düzenle / Sil (onaylı) |
+| `/admin/new` | AddEventPage — yeni etkinlik |
+| `/admin/:id/edit` | EditEventPage — etkinlik güncelle |
+| `*` | NotFoundPage — sayfa bulunamadı |
 
-## Sayfalar (route'lar)
+## Context
 
-- `/` — Ana sayfa, yaklaşan 2 etkinlik
-- `/etkinlikler` — Tüm etkinlikler, arama ve filtre
-- `/etkinlikler/:id` — Etkinlik detayı, güncelle ve sil
-- `/etkinlik-ekle` — Yeni etkinlik formu
-- `/etkinlikler/:id/guncelle` — Güncelleme formu (alanlar dolu gelir)
-- `/giris` — Giriş (deneme: demo@sdu.edu.tr / 123456)
-- `/kayit` — Kayıt
-- `/sifremi-unuttum` — Şifremi unuttum
-- `/hakkinda` — Hakkında
-- `*` — 404 sayfası
+`src/context/EventsContext.tsx`: etkinlik listesi ve `addEvent`, `updateEvent`, `deleteEvent` fonksiyonları. Sayfalar `useEvents()` ile bağlanır; yönetimde yapılan değişiklik Ana Sayfa ve Etkinlikler'de de görünür.
 
 ## Klasör yapısı
 
-- `src/components/` — layout, events, forms, ui bileşenleri
-- `src/context/` — EventContext, AuthContext
-- `src/pages/` — 10 sayfa bileşeni
-- `src/data/`, `src/types/`, `src/utils/` — veri, tipler, yardımcı fonksiyonlar
+- `src/components/` — layout (Header, Navigation, Footer), events (EventCard, EventList, EventFilter, EventDetail), forms (EventForm)
+- `src/context/` — EventsContext
+- `src/pages/` — 10 sayfa
+- `src/data/events.ts`, `src/types/campus-event.ts`
+- `src/utils/` — filter-events, format-date, validate-event
 
 ## Geliştirici
 
