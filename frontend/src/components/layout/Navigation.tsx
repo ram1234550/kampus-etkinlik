@@ -1,32 +1,43 @@
-import type { PageName } from "../../types/page";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
-const menuItems: { name: PageName; label: string }[] = [
-  { name: "home", label: "Ana Sayfa" },
-  { name: "events", label: "Etkinlikler" },
-  { name: "add", label: "Ekle" },
+const menuItems = [
+  { to: "/", label: "Ana Sayfa" },
+  { to: "/etkinlikler", label: "Etkinlikler" },
+  { to: "/etkinlik-ekle", label: "Ekle" },
+  { to: "/hakkinda", label: "Hakkında" },
 ];
 
-interface NavigationProps {
-  current: PageName;
-  onNavigate: (page: PageName) => void;
-}
+function Navigation() {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
-function Navigation({ current, onNavigate }: NavigationProps) {
   return (
     <nav>
+      {/* NavLink aktif sayfaya aria-current="page" ekler */}
       {menuItems.map((item) => (
+        <NavLink key={item.to} to={item.to} end={item.to === "/"}>
+          {item.label}
+        </NavLink>
+      ))}
+
+      {user ? (
         <a
-          key={item.name}
           href="#"
-          aria-current={current === item.name ? "page" : undefined}
           onClick={(e) => {
             e.preventDefault();
-            onNavigate(item.name);
+            logout();
+            navigate("/");
           }}
         >
-          {item.label}
+          Çıkış ({user.name})
         </a>
-      ))}
+      ) : (
+        <>
+          <NavLink to="/giris">Giriş</NavLink>
+          <NavLink to="/kayit">Kayıt</NavLink>
+        </>
+      )}
     </nav>
   );
 }

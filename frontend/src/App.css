@@ -387,3 +387,72 @@ figure img {
 .detay .kunye-kutu {
   margin-bottom: 0;
 }
+
+/* Vize ekleri */
+button.buton {
+  width: auto;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  font-weight: bold;
+}
+
+.buton-sil {
+  width: auto;
+  min-height: 44px;
+  padding: 0.6rem 1rem;
+  color: var(--renk-acik);
+  background: var(--renk-hata);
+  border: none;
+  border-radius: var(--kose);
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.buton-ikincil {
+  width: auto;
+  min-height: 44px;
+  padding: 0.6rem 1rem;
+  color: var(--renk-yazi);
+  background: var(--renk-kart);
+  border: 1px solid var(--renk-cizgi);
+  border-radius: var(--kose);
+  font: inherit;
+  cursor: pointer;
+}
+
+.modal-arka {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--bosluk-m);
+  background: hsl(0 0% 0% / 0.5);
+  z-index: 10;
+}
+
+.modal {
+  width: 100%;
+  max-width: 420px;
+  padding: var(--bosluk-m);
+  background: var(--renk-kart);
+  border-radius: var(--kose);
+}
+
+.modal h2 {
+  margin-top: 0;
+}
+
+.form-linkler {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: var(--bosluk-m) 0 0;
+}
+
+.form .mesaj {
+  margin-top: 0;
+}
