@@ -1,25 +1,37 @@
-https://kampus-etkinlik-sprint1-plum.vercel.app
+https://raimberdiaitmamatov-frontend.vercel.app
 
 # Kampüs Etkinlikleri
 
-Sprint 4: Vite + React + TypeScript (`frontend/` klasörü).
+Vize projesi: Vite + React + TypeScript + React Router (`frontend/` klasörü).
 
-## Dosyalar
+## Özellikler
 
-- `package.json` — Proje adı, komutlar (dev, build) ve paket listesi
-- `package-lock.json` — Yüklenen paketlerin tam sürümleri
-- `node_modules/` — İndirilen paketler; GitHub'a gönderilmez
-- `tsconfig*.json` — TypeScript ayarları
-- `vite.config.ts` — Vite ayarları ve React eklentisi
-- `index.html` — Tek HTML dosyası; içinde boş `div#root`
-- `src/main.tsx` — React'i başlatır, App'i root'a çizer
-- `src/App.tsx` — Beş sayfanın hepsi; sayfa geçişi ve arama state ile
-- `src/App.css` — Sprint 3'ten taşınan stiller
-- `src/index.css` — Genel stil dosyası; bu sprintte boş
-- `src/types/campus-event.ts` — Etkinlik tipi ve kategori tipi
-- `src/data/events.ts` — 6 etkinlik verisi
-- `src/utils/filter-events.ts` — Arama, kategori filtresi ve id ile bulma fonksiyonları
-- `public/` — Olduğu gibi kopyalanan dosyalar (afis.svg)
+- 10 route (React Router)
+- Context: `EventContext` (etkinlik ekle / güncelle / sil) ve `AuthContext` (giriş, kayıt, çıkış)
+- Silmeden önce onay penceresi; değişiklikler tüm sayfalarda görünür
+- Arama ve kategori filtresi
+- Form doğrulama: etkinlik formu, giriş, kayıt, şifremi unuttum
+- Mobil uyumlu tasarım
+
+## Sayfalar (route'lar)
+
+- `/` — Ana sayfa, yaklaşan 2 etkinlik
+- `/etkinlikler` — Tüm etkinlikler, arama ve filtre
+- `/etkinlikler/:id` — Etkinlik detayı, güncelle ve sil
+- `/etkinlik-ekle` — Yeni etkinlik formu
+- `/etkinlikler/:id/guncelle` — Güncelleme formu (alanlar dolu gelir)
+- `/giris` — Giriş (deneme: demo@sdu.edu.tr / 123456)
+- `/kayit` — Kayıt
+- `/sifremi-unuttum` — Şifremi unuttum
+- `/hakkinda` — Hakkında
+- `*` — 404 sayfası
+
+## Klasör yapısı
+
+- `src/components/` — layout, events, forms, ui bileşenleri
+- `src/context/` — EventContext, AuthContext
+- `src/pages/` — 10 sayfa bileşeni
+- `src/data/`, `src/types/`, `src/utils/` — veri, tipler, yardımcı fonksiyonlar
 
 ## Geliştirici
 
