@@ -139,7 +139,7 @@ a {
 .rozet {
   display: inline-block;
   padding: 0.1rem 0.5rem;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: bold;
   color: var(--renk-ana);
   background: var(--renk-rozet);
@@ -366,7 +366,7 @@ button:hover {
 
 .mesaj pre {
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--renk-yazi);
   white-space: pre-wrap;
   word-break: break-word;
