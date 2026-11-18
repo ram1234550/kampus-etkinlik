@@ -1,7 +1,6 @@
-// Bellek içi veri: sunucu yeniden başlayınca POST ile eklenenler kaybolur
-export const events = [
+// Örnek veri: id yok, MongoDB her kayda kendi _id'sini verir
+export const seedEvents = [
   {
-    id: "event-1",
     title: "Staj ve Kariyer Buluşması",
     category: "Seminer",
     capacity: 150,
@@ -11,7 +10,6 @@ export const events = [
     description: "Bölüm mezunları staj başvurusu, mülakat ve ilk iş deneyimlerini anlatıyor.",
   },
   {
-    id: "event-2",
     title: "Go ile Backend Atölyesi",
     category: "Atölye",
     capacity: 25,
@@ -21,7 +19,6 @@ export const events = [
     description: "Go dilinde basit bir HTTP sunucusu yazıyoruz; temel seviye, bilgisayarını getir.",
   },
   {
-    id: "event-3",
     title: "Bulut Bilişime Giriş",
     category: "Seminer",
     capacity: 80,
@@ -31,7 +28,6 @@ export const events = [
     description: "Sunucu, konteyner ve bulut servisleri arasındaki farklar örneklerle anlatılıyor.",
   },
   {
-    id: "event-4",
     title: "Algoritma Maratonu",
     category: "Yarışma",
     capacity: 60,
@@ -41,7 +37,6 @@ export const events = [
     description: "Üç kişilik takımlar dört saat boyunca algoritma soruları çözüyor; ilk üçe ödül.",
   },
   {
-    id: "event-5",
     title: "Açık Kaynağa Katkı Söyleşisi",
     category: "Söyleşi",
     capacity: 40,
@@ -51,7 +46,6 @@ export const events = [
     description: "GitHub'da ilk pull request nasıl açılır, projeler nasıl seçilir, deneyim paylaşımı.",
   },
   {
-    id: "event-6",
     title: "Arayüz Tasarımı Atölyesi",
     category: "Atölye",
     capacity: 30,
