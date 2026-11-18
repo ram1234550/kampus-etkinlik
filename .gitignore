@@ -1,3 +1,6 @@
 .DS_Store
 Thumbs.db
 .vscode/
+# Postman yerel çalışma alanı dosyaları
+.postman/
+postman/
