@@ -1,4 +1,4 @@
-# Kampüs Etkinlikleri — Backend (Express + MongoDB)
+# Kampüs Etkinlikleri — Backend (Express + MongoDB, tam CRUD)
 
 Etkinlikleri JSON olarak veren REST API. Veriler MongoDB'de (Mongoose) kalıcı olarak saklanır; sunucu kapanıp açılınca kayıtlar kaybolmaz.
 
@@ -25,12 +25,13 @@ Gerçek adres (MongoDB Atlas, şifreli) sadece `.env` dosyasındadır; `.env` Gi
 
 | Method | Endpoint | Amaç | Başarılı | Hata | Durum |
 |---|---|---|---|---|---|
-| GET | `/health` | Sunucu ayakta mı | 200 | — | Sprint 7 |
-| GET | `/events` | Listeyi getir (`?category=Atölye` isteğe bağlı) | 200 | — | Sprint 8 (MongoDB) |
-| GET | `/events/:id` | Tek etkinlik (`:id` = MongoDB `_id`) | 200 | 404 | Sprint 8 (MongoDB) |
-| POST | `/events` | Yeni etkinlik | 201 | 400 | Sprint 8 (MongoDB) |
-| PATCH | `/events/:id` | Güncelle | 200 | 400, 404 | Sprint 9 |
-| DELETE | `/events/:id` | Sil | 204 | 404 | Sprint 9 |
+| GET | `/health` | Sunucu ayakta mı | 200 | — | çalışıyor |
+| GET | `/events` | Listeyi getir; `?search=` (başlıkta arar, büyük/küçük harf fark etmez) ve `?category=` isteğe bağlı | 200 | — | çalışıyor |
+| GET | `/events/upcoming` | Bugün ve sonrası, tarihe göre sıralı | 200 | — | çalışıyor |
+| GET | `/events/:id` | Tek etkinlik (`:id` = MongoDB `_id`) | 200 | 404 | çalışıyor |
+| POST | `/events` | Yeni etkinlik | 201 | 400 | çalışıyor |
+| PATCH | `/events/:id` | Sadece gönderilen alanları güncelle; güncel kaydı döndürür | 200 | 400, 404 | çalışıyor |
+| DELETE | `/events/:id` | Sil; yanıt gövdesi yok | 204 | 404 | çalışıyor |
 
 **Status code'lar:** 200 tamam · 201 oluşturuldu · 204 içerik yok · 400 eksik/yanlış veri · 404 bulunamadı · 500 sunucu hatası
 
@@ -42,6 +43,8 @@ Bütün hatalar aynı biçimde döner:
 
 - Biçimi geçersiz id (`/events/yok`) ve olmayan id → **404** (500 değil).
 - Schema kuralına uymayan POST (eksik `title`/`category`/`date`, listede olmayan kategori, 3 harften kısa başlık) → **400**.
+- PATCH: boş body, değiştirilemeyen alan (`_id`, `createdAt`, `updatedAt`, `__v`), schema kuralına uymayan değer → **400**.
+- Tarih her yerde **"GG-AA-YYYY"** (`"15-10-2026"`); başka biçim (`"2026-12-20"`) ya da olmayan gün (`"31-02-2026"`) → **400**. Veritabanında gerçek `Date` olarak saklanır, böylece tarihe göre doğru sıralanır.
 - Beklenmeyen hata → **500** `"Server error"`; sunucu çalışmaya devam eder.
 
 ## Event şeması
@@ -51,7 +54,7 @@ Bütün hatalar aynı biçimde döner:
 | `title` | String | zorunlu, trim, 3–100 karakter |
 | `category` | String | zorunlu, `Seminer` · `Atölye` · `Söyleşi` · `Yarışma` |
 | `capacity` | Number | en az 0, varsayılan 0 |
-| `date` | String | zorunlu (`2026-12-01`) |
+| `date` | Date | zorunlu; API'de `"GG-AA-YYYY"` (`"01-12-2026"`) |
 | `time` | String | varsayılan `""` |
 | `location` | String | trim, varsayılan `""` |
 | `description` | String | trim, en fazla 500 karakter |
@@ -65,13 +68,15 @@ backend/
   src/
     app.js                          Express uygulaması, middleware, hata yakalayıcı
     server.js                       Önce veritabanına bağlanır, sonra portu dinler
-    seed.js                         npm run seed: siler + 6 etkinlik ekler
+    seed.js                         npm run seed: siler + 6 etkinlik ekler (2'si geçmiş tarihli)
+    utils/date.js                   "GG-AA-YYYY" <-> Date dönüşümü, bugünün başı
     config/database.js              MongoDB bağlantısı (MONGODB_URI)
     models/event-model.js           Event schema ve model
     data/seed-events.js             6 örnek etkinlik (id yok)
     routes/event-routes.js          Hangi adres hangi fonksiyona gider
     controllers/event-controller.js İsteği işler, yanıt döndürür
-  requests/kampus-api.json          Postman collection (6 istek)
+  requests/kampus-api.json          Postman collection (18 istek)
+  requests/run-results.json         Postman Collection Runner sonucu
   .env.example
   .gitignore
   package.json
@@ -79,7 +84,15 @@ backend/
 
 ## Test
 
-`requests/kampus-api.json` dosyasını Postman'e içe aktar (Import). Önce **2 Etkinlik listesi** isteğini gönder: ilk etkinliğin `_id` değeri `eventId` değişkenine kaydedilir ve **3 Tek etkinlik** isteği onu kullanır.
+`requests/kampus-api.json` dosyasını Postman'e içe aktar ve **Run collection** ile 18 isteği sırayla çalıştır. id'leri elle girmek gerekmez: 02 listedeki ilk `_id`'yi, 05 yeni oluşan kaydın `_id`'sini kaydeder; PATCH ve DELETE bu yeni kayıtla çalışır, seed verisi bozulmaz.
+
+Hocanın test collection'ı ile (backend açıkken):
+
+```bash
+newman run https://webdersi.vercel.app/test.json
+```
+
+Son çalıştırmanın sonucu: `requests/run-results.json`.
 
 ## Geliştirici
 
