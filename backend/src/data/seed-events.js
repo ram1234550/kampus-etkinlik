@@ -1,10 +1,11 @@
-// Örnek veri: id yok, MongoDB her kayda kendi _id'sini verir
+// Örnek veri: id yok, MongoDB her kayda kendi _id'sini verir.
+// Tarihler "GG-AA-YYYY"; ilk ikisi geçmişte (/events/upcoming'de görünmez).
 export const seedEvents = [
   {
     title: "Staj ve Kariyer Buluşması",
     category: "Seminer",
     capacity: 150,
-    date: "2026-11-18",
+    date: "22-10-2026",
     time: "13:30",
     location: "Mühendislik Fakültesi Konferans Salonu",
     description: "Bölüm mezunları staj başvurusu, mülakat ve ilk iş deneyimlerini anlatıyor.",
@@ -13,7 +14,7 @@ export const seedEvents = [
     title: "Go ile Backend Atölyesi",
     category: "Atölye",
     capacity: 25,
-    date: "2026-11-21",
+    date: "12-11-2026",
     time: "10:00",
     location: "Bilgisayar Laboratuvarı 3",
     description: "Go dilinde basit bir HTTP sunucusu yazıyoruz; temel seviye, bilgisayarını getir.",
@@ -22,7 +23,7 @@ export const seedEvents = [
     title: "Bulut Bilişime Giriş",
     category: "Seminer",
     capacity: 80,
-    date: "2026-11-26",
+    date: "03-12-2026",
     time: "15:00",
     location: "B Blok Amfi 2",
     description: "Sunucu, konteyner ve bulut servisleri arasındaki farklar örneklerle anlatılıyor.",
@@ -31,7 +32,7 @@ export const seedEvents = [
     title: "Algoritma Maratonu",
     category: "Yarışma",
     capacity: 60,
-    date: "2026-12-02",
+    date: "10-12-2026",
     time: "09:00",
     location: "Merkez Kütüphane Etkinlik Alanı",
     description: "Üç kişilik takımlar dört saat boyunca algoritma soruları çözüyor; ilk üçe ödül.",
@@ -40,7 +41,7 @@ export const seedEvents = [
     title: "Açık Kaynağa Katkı Söyleşisi",
     category: "Söyleşi",
     capacity: 40,
-    date: "2026-12-09",
+    date: "16-12-2026",
     time: "16:00",
     location: "Öğrenci Merkezi Toplantı Odası",
     description: "GitHub'da ilk pull request nasıl açılır, projeler nasıl seçilir, deneyim paylaşımı.",
@@ -49,7 +50,7 @@ export const seedEvents = [
     title: "Arayüz Tasarımı Atölyesi",
     category: "Atölye",
     capacity: 30,
-    date: "2026-12-15",
+    date: "22-12-2026",
     time: "11:00",
     location: "Tasarım Stüdyosu",
     description: "Figma ile mobil uygulama ekranı tasarlıyoruz; renk, boşluk ve tipografi temelleri.",
